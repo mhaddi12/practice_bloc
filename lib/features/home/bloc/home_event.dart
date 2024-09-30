@@ -7,9 +7,15 @@ class InitialFetchState extends HomeEvent {}
 
 //click
 
-class HomeProductCartButtonClickedEvent extends HomeEvent {}
+class HomeProductCartButtonClickedEvent extends HomeEvent {
+  final ProductDataModel clickedProduct;
+  HomeProductCartButtonClickedEvent({required this.clickedProduct});
+}
 
-class HomeWishlistButtonClickedEvent extends HomeEvent {}
+class HomeWishlistButtonClickedEvent extends HomeEvent {
+  final ProductDataModel clickedProduct;
+  HomeWishlistButtonClickedEvent({required this.clickedProduct});
+}
 
 //navigate
 

@@ -32,6 +32,14 @@ class _HomeState extends State<Home> {
         } else if (state is HomeNavigateToWishlistPageActionState) {
           Navigator.push(
               context, MaterialPageRoute(builder: (_) => const WishList()));
+        } else if (state is HomeProductsCartedActionState) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.green,
+              content: Text("Added item at Cart")));
+        } else if (state is HomeProductsWishlistedActionState) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              backgroundColor: Colors.green,
+              content: Text("Added item at WishList")));
         }
       },
       listenWhen: (previous, current) => current is HomeActionState,
@@ -57,7 +65,7 @@ class _HomeState extends State<Home> {
                 actions: [
                   IconButton(
                       onPressed: () {
-                        homebloc.add(HomeCartButtonNavigateEvent());
+                        homebloc.add(HomeWishlistButtonNavigateEvent());
                       },
                       icon: const Icon(
                         Icons.favorite_border,
@@ -65,7 +73,7 @@ class _HomeState extends State<Home> {
                       )),
                   IconButton(
                       onPressed: () {
-                        homebloc.add(HomeWishlistButtonNavigateEvent());
+                        homebloc.add(HomeCartButtonNavigateEvent());
                       },
                       icon: const Icon(
                         Icons.shopping_cart,
@@ -77,7 +85,10 @@ class _HomeState extends State<Home> {
                 itemCount: successState.productDataModel.length,
                 itemBuilder: (context, index) {
                   final product = successState.productDataModel[index];
-                  return ProductTitleWidgets(product: product);
+                  return ProductTitleWidgets(
+                    product: product,
+                    homeBloc: homebloc,
+                  );
                 },
               ),
             );
@@ -101,9 +112,11 @@ class ProductTitleWidgets extends StatelessWidget {
   const ProductTitleWidgets({
     super.key,
     required this.product,
+    required this.homeBloc,
   });
 
   final ProductDataModel product;
+  final HomeBloc homeBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -168,13 +181,19 @@ class ProductTitleWidgets extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        homeBloc.add(HomeWishlistButtonClickedEvent(
+                            clickedProduct: product));
+                      },
                       icon: const Icon(
                         Icons.favorite,
                         color: Colors.red,
                       )),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        homeBloc.add(HomeProductCartButtonClickedEvent(
+                            clickedProduct: product));
+                      },
                       icon: const Icon(
                         Icons.shopping_cart,
                       )),
