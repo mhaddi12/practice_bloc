@@ -27,7 +27,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         productDataModel: ProductData.products
             .map((e) => ProductDataModel(
                 id: e['id'],
-                isWishlisted: false,
                 name: e['name'],
                 description: e['description'],
                 price: e['price'],
@@ -52,7 +51,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     wishListItem.add(event.clickedProduct);
     print(wishListItem);
     emit(HomeProductsWishlistedActionState());
-    emit(HomeIconColorChangeState());
+    // emit(HomeIconColorChangeState());
   }
 
   FutureOr<void> homeCartButtonNavigateEvent(

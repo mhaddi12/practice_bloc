@@ -17,7 +17,6 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   FutureOr<void> wishlistInitailFetchEvent(
       WishlistInitailFetchEvent event, Emitter<WishlistState> emit) {
     emit(WishlistSuccessState(wishlist: wishListItem));
-    emit(WishlistIconColorChangeState());
   }
 
   FutureOr<void> wishlistRemoveFromWishlistEvent(

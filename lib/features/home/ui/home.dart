@@ -187,7 +187,10 @@ class ProductTitleWidgets extends StatelessWidget {
                     },
                     icon: Icon(
                       Icons.favorite,
-                      color: product.isWishlisted! ? Colors.red : Colors.grey,
+                      color:
+                          // product.isWishlisted! ? Colors.red :
+
+                          Colors.grey,
                     ),
                   ),
                   IconButton(

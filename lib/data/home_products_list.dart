@@ -1,7 +1,6 @@
 class ProductData {
   static List<Map<String, dynamic>> products = [
     {
-      "isWishlisted": false,
       "id": 1,
       "name": "Smartphone",
       "description": "A high-quality smartphone with a 6.5-inch display.",
@@ -12,7 +11,6 @@ class ProductData {
           "https://cdn.thewirecutter.com/wp-content/media/2024/05/smartphone-2048px-1013.jpg"
     },
     {
-      "isWishlisted": false,
       "id": 2,
       "name": "Laptop",
       "description": "A powerful laptop for professionals and gamers.",
@@ -23,7 +21,6 @@ class ProductData {
           "https://images-cdn.ubuy.co.id/64c4fb3e273d75524f4a8c2d-hp-stream-14-laptop-intel-celeron.jpg"
     },
     {
-      "isWishlisted": false,
       "id": 3,
       "name": "Headphones",
       "description": "Wireless headphones with noise cancellation.",

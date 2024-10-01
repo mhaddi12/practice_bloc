@@ -6,7 +6,7 @@ class ProductDataModel {
   final int quantity;
   final String category;
   final String imageUrl;
-  final bool? isWishlisted;
+ 
 
   ProductDataModel(
       {required this.id,
@@ -15,8 +15,7 @@ class ProductDataModel {
       required this.price,
       required this.quantity,
       required this.category,
-      required this.imageUrl,
-      this.isWishlisted = false});
+      required this.imageUrl});
 
   factory ProductDataModel.fromJson(Map<String, dynamic> json) {
     return ProductDataModel(
@@ -26,7 +25,6 @@ class ProductDataModel {
         price: json['price'],
         quantity: json['quantity'],
         category: json['category'],
-        imageUrl: json['image_url'],
-        isWishlisted: json['isWishlisted']);
+        imageUrl: json['image_url'],);
   }
 }
