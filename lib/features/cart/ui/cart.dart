@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'bloc/cart_bloc.dart';
+import 'package:practice_bloc/features/cart/bloc/cart_bloc.dart';
 
 class Cart extends StatefulWidget {
   const Cart({super.key});
@@ -46,35 +46,70 @@ class _CartState extends State<Cart> {
                   padding: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 16.0),
                   child: Card(
-                    elevation: 4,
+                    elevation: 6,
+                    shadowColor: Colors.teal.withOpacity(0.4),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(16),
                     ),
                     child: ListTile(
                       contentPadding: const EdgeInsets.all(16.0),
                       leading: CircleAvatar(
                         backgroundColor: Colors.teal,
-                        child: Icon(Icons.shopping_cart, color: Colors.white),
+                        radius: 28,
+                        child: Icon(
+                          Icons.shopping_cart,
+                          color: Colors.white,
+                          size: 28,
+                        ),
                       ),
                       title: Text(
                         cartItem.name,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      subtitle: Text(
-                        'Price: \$${cartItem.price}',
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 16,
-                        ),
-                      ),
-                      trailing: Text(
-                        'Qty: ${cartItem.quantity}',
                         style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.teal,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 4),
+                          Text(
+                            'Price: \$${cartItem.price}',
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: 16,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Qty: ${cartItem.quantity}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.teal,
+                            ),
+                          ),
+                        ],
+                      ),
+                      trailing: SizedBox(
+                        height: 100,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                cartbloc.add(
+                                    CartRemoveFromCartEvent(id: cartItem.id));
+                              },
+                              child: Text(
+                                'Remove',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.redAccent,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

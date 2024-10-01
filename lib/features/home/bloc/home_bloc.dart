@@ -12,7 +12,7 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
-    on<InitialFetchState>(initialFetchState);
+    on<InitialFetchEvent>(initialFetchState);
     on<HomeProductCartButtonClickedEvent>(homeProductCartButtonClickedEvent);
     on<HomeWishlistButtonClickedEvent>(homeWishlistButtonClickedEvent);
     on<HomeCartButtonNavigateEvent>(homeCartButtonNavigateEvent);
@@ -20,13 +20,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   FutureOr<void> initialFetchState(
-      InitialFetchState event, Emitter<HomeState> emit) async {
+      InitialFetchEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
     await Future.delayed(const Duration(seconds: 3));
     emit(HomeLoadedSuccessState(
         productDataModel: ProductData.products
             .map((e) => ProductDataModel(
                 id: e['id'],
+                isWishlisted: false,
                 name: e['name'],
                 description: e['description'],
                 price: e['price'],
@@ -45,10 +46,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> homeWishlistButtonClickedEvent(
       HomeWishlistButtonClickedEvent event, Emitter<HomeState> emit) {
+    // final clickedProduct = event.clickedProduct;
+    // clickedProduct. = !clickedProduct.isWishlisted;
     print("Wishlist clicked");
     wishListItem.add(event.clickedProduct);
     print(wishListItem);
     emit(HomeProductsWishlistedActionState());
+    emit(HomeIconColorChangeState());
   }
 
   FutureOr<void> homeCartButtonNavigateEvent(

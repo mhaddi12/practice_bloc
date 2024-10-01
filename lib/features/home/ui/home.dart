@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    homebloc.add(InitialFetchState());
+    homebloc.add(InitialFetchEvent());
     super.initState();
   }
 
@@ -35,11 +35,11 @@ class _HomeState extends State<Home> {
         } else if (state is HomeProductsCartedActionState) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               backgroundColor: Colors.green,
-              content: Text("Added item at Cart")));
+              content: Text("Added item to Cart")));
         } else if (state is HomeProductsWishlistedActionState) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               backgroundColor: Colors.green,
-              content: Text("Added item at WishList")));
+              content: Text("Added item to WishList")));
         }
       },
       listenWhen: (previous, current) => current is HomeActionState,
@@ -181,22 +181,22 @@ class ProductTitleWidgets extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                      onPressed: () {
-                        homeBloc.add(HomeWishlistButtonClickedEvent(
-                            clickedProduct: product));
-                      },
-                      icon: const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      )),
+                    onPressed: () {
+                      homeBloc.add(HomeWishlistButtonClickedEvent(
+                          clickedProduct: product));
+                    },
+                    icon: Icon(
+                      Icons.favorite,
+                      color: product.isWishlisted! ? Colors.red : Colors.grey,
+                    ),
+                  ),
                   IconButton(
-                      onPressed: () {
-                        homeBloc.add(HomeProductCartButtonClickedEvent(
-                            clickedProduct: product));
-                      },
-                      icon: const Icon(
-                        Icons.shopping_cart,
-                      )),
+                    onPressed: () {
+                      homeBloc.add(HomeProductCartButtonClickedEvent(
+                          clickedProduct: product));
+                    },
+                    icon: const Icon(Icons.shopping_cart),
+                  ),
                 ],
               ),
             ],

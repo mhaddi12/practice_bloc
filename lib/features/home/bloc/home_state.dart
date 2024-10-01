@@ -16,6 +16,8 @@ class HomeLoadedSuccessState extends HomeState {
 
 class HomeErrorState extends HomeState {}
 
+class HomeIconColorChangeState extends HomeState {}
+
 //ActionState
 class HomeNavigateToWishlistPageActionState extends HomeActionState {}
 

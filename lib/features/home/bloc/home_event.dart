@@ -3,7 +3,7 @@ part of 'home_bloc.dart';
 @immutable
 abstract class HomeEvent {}
 
-class InitialFetchState extends HomeEvent {}
+class InitialFetchEvent extends HomeEvent {}
 
 //click
 

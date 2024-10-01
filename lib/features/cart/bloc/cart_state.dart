@@ -12,3 +12,9 @@ class CartSuccessState extends CartState {
 
   CartSuccessState({required this.cartList});
 }
+
+class CartItemRemoveState extends CartState {
+  // final int id;
+
+  // CartItemRemoveState({required this.id});
+}
